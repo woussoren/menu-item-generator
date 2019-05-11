@@ -13,7 +13,7 @@ import {ButtonModule} from 'primeng/button';
   imports: [
     RouterModule.forRoot([
       { path: 'navigation/:afdeling', component: NavigationComponent },
-      { path: '**', redirectTo: 'navigation' }
+      { path: '**', redirectTo: 'navigation/DMO' }
     ]),
     FormsModule, SlideMenuModule, ButtonModule
   ],

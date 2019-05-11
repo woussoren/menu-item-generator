@@ -13,6 +13,7 @@ export class NavigationComponent implements OnInit {
   name = 'DMO\\JIVC\\C4I&I\\SATS\\SYSMGT 1';
 
   items: MenuItem[];
+  sub: any;
 
   organizationStructure = [
     {department: 'DMO', workspace: 'swr000001'},
@@ -32,6 +33,10 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
     this.name = this.route.snapshot.params['afdeling'];
     this.selectDept(this.name);
+    this.sub = this.route.params.subscribe(params => {
+      this.name = params['afdeling'];
+      this.selectDept(this.name);
+    })
   }
 
   selectDept(name: string) {
