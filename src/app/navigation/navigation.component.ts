@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -10,10 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
 
-  name = 'DMO\\JIVC\\C4I&I\\SATS\\SYSMGT 1';
-
   items: MenuItem[];
   sub: any;
+  name: string;
 
   organizationStructure = [
     {department: 'DMO', workspace: 'swr000001'},
@@ -27,11 +26,16 @@ export class NavigationComponent implements OnInit {
   ];
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.name = this.route.snapshot.params['afdeling'];
+    if (this.name == undefined) {
+      this.name = this.organizationStructure[0].department;
+      this.router.navigate(['/navigation', this.name])
+    }
     this.selectDept(this.name);
     this.sub = this.route.params.subscribe(params => {
       this.name = params['afdeling'];
